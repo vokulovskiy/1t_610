@@ -14,6 +14,8 @@ version: '3.8'
 
 services:
   db:
+    networks:
+     - pg-network
     build:
       context: ./db
     container_name: postgres_container
@@ -22,11 +24,13 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: okulovskiy
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
 
   app:
+    networks:
+     - pg-network
     build:
       context: ./app
     container_name: python_app
@@ -34,6 +38,8 @@ services:
       - db
 volumes:
   db_data:
+networks:
+  pg-network:
 ###################################
 # 2. Файлы для PostgreSQL
 # db/Dockerfile
@@ -56,18 +62,18 @@ INSERT INTO test_table (name, surname, city, age) VALUES
 ('Mike', 'Brown', 'London', 45),
 ('Lisa', 'Johnson', 'Paris', 30),
 ('Paul', 'Walker', 'Berlin', 41),
-('Eva', 'Davis', 'Rome', 37),
-('Tom', 'Harris', 'Sydney', 52),
+('Evva', 'Davis', 'Rome', 37),
+('Tomas', 'Harris', 'Sydney', 52),
 ('Lara', 'Jones', 'Madrid', 29),
 ('Mark', 'Clark', 'Toronto', 27),
 ('Jane', 'Taylor', 'Dubai', 33),
 ('Nina', 'Anderson', 'Vienna', 22),
 ('Jake', 'Martinez', 'Prague', 28),
 ('Sara', 'Roberts', 'Amsterdam', 36),
-('Alex', 'Lee', 'Tokyo', 50),
+('Alexander', 'Lee', 'Tokyo', 55),
 ('Ella', 'Perez', 'Oslo', 44),
-('Leo', 'Turner', 'Cairo', 39),
-('Mia', 'Morgan', 'Delhi', 21),
+('Leonid', 'Turner', 'Cairo', 39),
+('Mila', 'Morgan', 'Delhi', 21),
 ('Omar', 'Hill', 'Shanghai', 48),
 ('Noah', 'Adams', 'Cape Town', 35),
 ('Zara', 'Scott', 'Singapore', 26);
