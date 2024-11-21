@@ -6,4 +6,5 @@ COPY main.py .
 
 RUN pip install psycopg2-binary
 
+# CMD ["/bin/bash"]
 CMD ["python", "main.py"]

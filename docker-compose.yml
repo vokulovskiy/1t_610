@@ -2,6 +2,8 @@ version: '3.8'
 
 services:
   db:
+    networks:
+     - pg-network
     build:
       context: ./db
     container_name: postgres_container
@@ -10,11 +12,13 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: okulovskiy
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
 
   app:
+    networks:
+     - pg-network
     build:
       context: ./app
     container_name: python_app
@@ -22,3 +26,6 @@ services:
       - db
 volumes:
   db_data:
+networks:
+  pg-network:
+
